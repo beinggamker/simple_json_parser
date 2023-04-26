@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Scanner.h"
+#include "TokenList.h"
 
 std::ostream& operator<<(std::ostream& os, const TokenType& type) {
 	switch (type) {
@@ -56,15 +57,26 @@ int main() {
 			"address": "123 Main St, Any town USA"
 		}
 	)";
-	JsonLexer lexer(source);
+	//JsonLexer lexer(source);
 
-	Token token = lexer.nextToken();
-	while (token.getType() != TokenType::END_OF_FILE)
+	//Token token = lexer.nextToken();
+	//while (token.getType() != TokenType::END_OF_FILE)
+	//{
+	//	std::cout << "Token type: " << token.getType() << std::endl;
+	//	std::cout << "Token value: " << token.value << std::endl;
+	//	token = lexer.nextToken();
+	//}
+
+	TokenList tokens(source);
+
+	//使用迭代器或者循环来遍历,出现了“absort has been called”的情况
+	while (tokens.hasNext())
 	{
+		Token token = tokens.next();
 		std::cout << "Token type: " << token.getType() << std::endl;
 		std::cout << "Token value: " << token.value << std::endl;
-		token = lexer.nextToken();
 	}
+
 
 	return 0;
 }
