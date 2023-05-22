@@ -2,6 +2,7 @@
 #include <string>
 #include "Scanner.h"
 #include "TokenList.h"
+#include "Parser.h"
 
 std::ostream& operator<<(std::ostream& os, const TokenType& type) {
 	switch (type) {
@@ -76,6 +77,11 @@ int main() {
 		std::cout << "Token type: " << token.getType() << std::endl;
 		std::cout << "Token value: " << token.value << std::endl;
 	}
+
+	//如果想要检查我的解析器是否正常工作，我怕就需要将它们解析成JsonValue对象
+	//再将JsonValue对象转换成字符串
+	JsonParser parse(source);
+	JsonValue* value = parse.parse();
 
 
 	return 0;
